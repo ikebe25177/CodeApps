@@ -4,21 +4,23 @@
 
 ## 今回追加または変更した機能
 
-- `sample-app` を新規追加
-- Node.js + Express でローカルWebアプリを実装
-- `/` でサンプル画面を表示
-- `/api/status` で動作確認用JSONを返却
+- PowerShell エントリを廃止し、実行導線を Node.js CLI に統一
+- `sample-app/codeapps-cli.js` を追加し、`prepare` / `startDev` / `buildAndPush` を実行可能化
+- `sample-app` の画面を React UI 化し、ブラウザからジョブ実行とログ確認を可能化
+- `sample-app/server.js` にタスクAPIを追加（`/api/tasks`, `/api/dev/start`, `/api/dev/stop`）
 
 ## アーキテクチャ
 
 - 単一プロセス・単一ポート構成
-- `server.js` が静的ファイル配信とAPI提供を同時に担当
-- フロントエンドは `sample-app/public` のHTML/CSS/JSをそのまま配信
+- `sample-app/server.js` が静的配信・React UI・実行APIを同時に提供
+- Node.js 実行ロジックは `sample-app/src/codeAppsRunner.js` に集約
+- 実行エントリは `sample-app/codeapps-cli.js` に統一
 
 ## 使用技術
 
 - Node.js
 - Express
+- React 18 (CDN)
 - HTML / CSS / JavaScript
 
 ## セットアップまたは起動方法
@@ -36,10 +38,19 @@
 	npm start
 	```
 
+3. CLI を直接使う場合
+
+	```bash
+	npm run cli -- prepare
+	npm run cli -- startDev
+	npm run cli -- buildAndPush --authMode deviceCode
+	```
+
 ## 画面確認方法
 
-- `sample-app` を起動した状態で、VS Codeのポートタブから `8006` を開いて確認
-- 画面の「APIステータスを確認」ボタンで `/api/status` の疎通を確認
+- `sample-app` を起動した状態で、VS Code のポートタブから `8006` を開いて確認
+- React UI のフォームで環境値を設定し、`Prepare` / `Build & Push` / `Start Dev` を実行
+- 画面下部のログ欄で処理ログを確認
 
 ## 使用ポート
 
@@ -51,20 +62,19 @@
 - 監査案件一覧、重大指摘、次アクション、進行状況KPIを表示する構成へ変更
 - Power Apps への反映は `pac auth create --deviceCode` と `pac code push` を利用
 
-## testCodeApps
+## Node CLI
 
-testCodeApps/codeApps.ps1 は Power Apps Code Apps のサンプル取得、依存関係のインストール、ローカル開発、ビルドと push を補助するスクリプトです。
+`sample-app/codeapps-cli.js` が CodeApps 操作の唯一のエントリです。
 
 主な挙動:
 - Git clone と npm install は認証なしで実行します。
 - pac auth create は build/push の直前にだけ実行します。
-- コンテナ環境では既定で device code 認証を使います。
+- 既定では device code 認証を使います。
 
-主な引数:
-- -Workspace: 作業ディレクトリ
-- -StartDev: npm run dev を実行
-- -BuildAndPush: build 後に pac code push を実行
-- -AuthMode deviceCode|interactive|none: 認証方式を選択
+主なコマンド:
+- `npm run cli -- prepare`
+- `npm run cli -- startDev`
+- `npm run cli -- buildAndPush --authMode deviceCode`
 
 権限メモ:
 - 対象環境への接続と push には Power Platform 環境へのアクセス権が必要です。

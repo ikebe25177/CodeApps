@@ -14,29 +14,10 @@
   </head>
   <body>
     <div class="noise"></div>
-    <main class="container">
-      <p class="eyebrow">LOCAL SAMPLE APP</p>
-      <h1>Node.jsで動くローカル検証ページ</h1>
-      <p class="lead">この画面は <strong>Express + static hosting</strong> で配信されています。APIの疎通も下のボタンで確認できます。</p>
-      <div class="actions">
-        <button id="checkBtn">APIステータスを確認</button>
-        <span id="status">未確認</span>
-      </div>
-      <section class="cards">
-        <article class="card">
-          <h2>固定ポート</h2>
-          <p>0.0.0.0:8006 で待ち受け</p>
-        </article>
-        <article class="card">
-          <h2>単一プロセス</h2>
-          <p>サーバー1つでフロントとAPIを提供</p>
-        </article>
-        <article class="card">
-          <h2>ローカル動作</h2>
-          <p>追加ビルドなしですぐ起動</p>
-        </article>
-      </section>
-    </main>
-    <script src="app.js"></script>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel" src="app.js"></script>
   </body>
 </html>

@@ -5,7 +5,8 @@
   "description": "Local sample app running on port 8006",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "cli": "node codeapps-cli.js"
   },
   "dependencies": {
     "express": "^4.19.2"

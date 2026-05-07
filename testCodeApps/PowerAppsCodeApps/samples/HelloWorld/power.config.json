@@ -1,0 +1,7 @@
+{
+  "appDisplayName": "External Audit Dashboard",
+  "description": "External audit management dashboard app",
+  "environmentId": "91c808ac-8704-ea1c-bcd8-27eac0cddab8",
+  "buildPath": "dist",
+  "buildEntryPoint": "index.html"
+}
