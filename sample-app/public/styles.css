@@ -1,0 +1,111 @@
+:root {
+  --bg-a: #fff4d6;
+  --bg-b: #e4f2ff;
+  --ink: #1f1d18;
+  --accent: #0b6d61;
+  --card: rgba(255, 255, 255, 0.72);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  background: radial-gradient(circle at 10% 15%, var(--bg-a), transparent 45%),
+    radial-gradient(circle at 85% 10%, #ffd7b2, transparent 35%),
+    radial-gradient(circle at 80% 80%, var(--bg-b), transparent 40%),
+    #f7fafc;
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: linear-gradient(0deg, transparent 24%, rgba(0, 0, 0, 0.3) 25%, transparent 26%),
+    linear-gradient(90deg, transparent 24%, rgba(0, 0, 0, 0.3) 25%, transparent 26%);
+  background-size: 3px 3px;
+}
+
+.container {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 64px 24px;
+}
+
+.eyebrow {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #755400;
+}
+
+h1 {
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1.08;
+}
+
+.lead {
+  max-width: 700px;
+  line-height: 1.8;
+  margin-top: 18px;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 24px;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 20px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(11, 109, 97, 0.3);
+}
+
+#status {
+  font-weight: 700;
+}
+
+.cards {
+  margin-top: 30px;
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+  background: var(--card);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.card p {
+  margin: 10px 0 0;
+}

@@ -22,3 +22,15 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# Personal agent and hook files
+AGENTS.md
+.github/hooks/
+
+# Local VS Code and dev container settings
+.devcontainer/
+.vscode/
+
+# Library folders (do not track)
+node_modules/
+vendor/
