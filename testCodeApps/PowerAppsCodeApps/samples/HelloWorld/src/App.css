@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+#root {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+[class*='fui-Text'] {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+button,
+[class*='fui-Button'] {
+  font-family: 'Noto Sans JP', sans-serif;
+}
