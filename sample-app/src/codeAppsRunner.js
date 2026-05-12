@@ -7,7 +7,10 @@ const DEFAULT_OPTIONS = {
   environmentId: '91c808ac-8704-ea1c-bcd8-27eac0cddab8',
   repoUrl: 'https://github.com/microsoft/PowerAppsCodeApps.git',
   sampleRel: 'samples/HelloWorld',
-  authMode: 'deviceCode',
+  authMode: 'servicePrincipal',
+  tenantId: '',
+  clientId: '',
+  clientSecret: '',
 };
 
 let devProcess = null;
@@ -132,12 +135,31 @@ async function ensurePacAuth(options, logger) {
   if (options.authMode === 'deviceCode') {
     args.push('--deviceCode');
   }
+  if (options.authMode === 'servicePrincipal') {
+    if (!options.tenantId || !options.clientId || !options.clientSecret) {
+      throw new Error('tenantId, clientId, and clientSecret are required for servicePrincipal auth mode.');
+    }
+    args.push(
+      '--tenant',
+      options.tenantId,
+      '--applicationId',
+      options.clientId,
+      '--clientSecret',
+      options.clientSecret
+    );
+  }
   if (options.authMode === 'none') {
     logLine(logger, '[warn] authMode=none selected; skip pac auth create');
     return;
   }
 
-  logLine(logger, `[run] pac ${args.join(' ')}`);
+  const displayArgs = [...args];
+  const secretIndex = displayArgs.indexOf('--clientSecret');
+  if (secretIndex >= 0 && displayArgs[secretIndex + 1]) {
+    displayArgs[secretIndex + 1] = '***';
+  }
+
+  logLine(logger, `[run] pac ${displayArgs.join(' ')}`);
   await runCommand('pac', args, {}, logger);
 }
 

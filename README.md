@@ -43,7 +43,7 @@
 	```bash
 	npm run cli -- prepare
 	npm run cli -- startDev
-	npm run cli -- buildAndPush --authMode deviceCode
+	npm run cli -- buildAndPush --authMode servicePrincipal --tenantId <TENANT_ID> --clientId <CLIENT_ID> --clientSecret <CLIENT_SECRET>
 	```
 
 ## 画面確認方法
@@ -60,7 +60,7 @@
 
 - `testCodeApps/PowerAppsCodeApps/samples/HelloWorld` を、外部監査管理アプリ向けのダッシュボードUIに更新
 - 監査案件一覧、重大指摘、次アクション、進行状況KPIを表示する構成へ変更
-- Power Apps への反映は `pac auth create --deviceCode` と `pac code push` を利用
+- Power Apps への反映は `pac auth create` のサービスプリンシパル認証と `pac code push` を利用
 
 ## Node CLI
 
@@ -69,13 +69,14 @@
 主な挙動:
 - Git clone と npm install は認証なしで実行します。
 - pac auth create は build/push の直前にだけ実行します。
-- 既定では device code 認証を使います。
+- 既定ではサービスプリンシパル認証を使います。
 
 主なコマンド:
 - `npm run cli -- prepare`
 - `npm run cli -- startDev`
-- `npm run cli -- buildAndPush --authMode deviceCode`
+- `npm run cli -- buildAndPush --authMode servicePrincipal --tenantId <TENANT_ID> --clientId <CLIENT_ID> --clientSecret <CLIENT_SECRET>`
 
 権限メモ:
 - 対象環境への接続と push には Power Platform 環境へのアクセス権が必要です。
 - 典型的には Environment Maker、または Dataverse の System Customizer / System Administrator 相当の権限が必要です。
+- サービスプリンシパル認証では、アプリ登録自体に Power Platform 管理スコープのアクセス許可（環境参照権限）が必要です。

@@ -26,6 +26,9 @@ function parseArgs(argv) {
     if (key === 'repoUrl') options.repoUrl = value;
     if (key === 'sampleRel') options.sampleRel = value;
     if (key === 'authMode') options.authMode = value;
+    if (key === 'tenantId') options.tenantId = value;
+    if (key === 'clientId') options.clientId = value;
+    if (key === 'clientSecret') options.clientSecret = value;
   }
 
   return { command, options };
@@ -36,7 +39,7 @@ function printHelp() {
 
 Usage:
   node codeapps-cli.js prepare [--workspace PATH] [--sampleRel PATH]
-  node codeapps-cli.js buildAndPush [--environmentId ID] [--authMode deviceCode|interactive|none]
+  node codeapps-cli.js buildAndPush [--environmentId ID] [--authMode servicePrincipal|deviceCode|none] [--tenantId TENANT] [--clientId APP_ID] [--clientSecret SECRET]
   node codeapps-cli.js startDev
   node codeapps-cli.js stopDev
 `);

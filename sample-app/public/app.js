@@ -7,7 +7,10 @@ function App() {
     environmentId: '',
     repoUrl: '',
     sampleRel: '',
-    authMode: 'deviceCode',
+    authMode: 'servicePrincipal',
+    tenantId: '',
+    clientId: '',
+    clientSecret: '',
   });
   const [taskId, setTaskId] = useState('');
   const [taskState, setTaskState] = useState('idle');
@@ -147,12 +150,28 @@ function App() {
           </label>
           <label>
             Auth Mode
-            <select value={config.authMode || 'deviceCode'} onChange={(e) => updateConfig('authMode', e.target.value)}>
+            <select value={config.authMode || 'servicePrincipal'} onChange={(e) => updateConfig('authMode', e.target.value)}>
+              <option value="servicePrincipal">servicePrincipal</option>
               <option value="deviceCode">deviceCode</option>
-              <option value="interactive">interactive</option>
               <option value="none">none</option>
             </select>
           </label>
+          {config.authMode === 'servicePrincipal' && (
+            <>
+              <label>
+                Tenant ID
+                <input value={config.tenantId || ''} onChange={(e) => updateConfig('tenantId', e.target.value)} />
+              </label>
+              <label>
+                Client ID
+                <input value={config.clientId || ''} onChange={(e) => updateConfig('clientId', e.target.value)} />
+              </label>
+              <label>
+                Client Secret
+                <input type="password" value={config.clientSecret || ''} onChange={(e) => updateConfig('clientSecret', e.target.value)} />
+              </label>
+            </>
+          )}
         </article>
 
         <article className="panel">
